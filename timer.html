@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+</head>
+<body>
+	<div class="box">
+		距离活动结束还有<span id="time"></span>
+	</div>
+
+	<!-- <script src="jquery.min.js"></script> -->
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script>
+		//不足两位补0
+		function timeS(num){
+			return ('0'+num).slice(-2);
+		}
+		 var differTime=1*5*1000; //后台传过来时间差
+		 var timers=function(){
+			if (differTime>0) {
+				differTime=differTime-1000;
+				var d = parseInt(differTime/(24*60*60*1000));
+				var h = parseInt(differTime/(60*60*1000)%24);
+				var m = parseInt(differTime/(60*1000)%60);
+				var s = parseInt(differTime/1000%60);
+				var t_html = d+"天"+timeS(h)+"时"+timeS(m)+"分"+timeS(s)+"秒";
+				$("#time").html(t_html);
+			}
+			else{
+				$("#time").html('团购已结束');
+			}
+		}
+		setInterval(timers, 1000);
+	</script>
+</body>
+</html>
