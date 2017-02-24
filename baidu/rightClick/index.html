@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+	<title>自定义网页右键菜单</title>
+</head>
+<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	body{
+		height: 100vh;
+		display: flex;
+		justify-content: flex-end;
+	}
+	h1{ 
+		width: 500px;
+		height: 50px;
+		background: #ddd;
+        text-align: center;
+        padding: 10px 0;
+ 	}
+ 	ul{
+ 		position: fixed;
+ 		display: none;
+ 		width: 200px;
+ 		border: 1px solid #ccc;
+ 		top: 0;
+ 		left: 0;
+ 		background-color: #fff;
+ 	}
+ 	ul li{
+ 		list-style-type: none;
+         width: 100px;
+         margin: 10px 10px;
+ 	}
+</style>
+<body>
+   <h1 class="bottom" id="rclick">right click to see the me</h1>
+   <ul id="menu">
+   	  <li>Menu Item1</li>
+   	  <li>Menu Item2</li>
+   	  <li>Menu Item2</li>
+   </ul>
+   <script type="text/javascript">
+   	   var h1=document.getElementById('rclick');
+   	   var menu=document.getElementById('menu');
+   	   h1.oncontextmenu =function(e){
+   	   	    var ulHeight=menu.offsetHeight;
+   	   	    var ulWidth=menu.offsetWidth;
+   	   	    var dWidth=document.documentElement.clientWidth;
+   	   	    var dHight=document.documentElement.clientHeight
+   	   	    var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+            var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+            
+            var x = e.pageX || e.clientX + scrollX;
+            var y = e.pageY || e.clientY + scrollY;
+            
+            if ( y+ulHeight > dHight && x+ulWidth > dWidth) {
+                    menu.style.display="block";
+		           menu.style.left=x-ulWidth+'px';
+		           menu.style.top=y-ulHeight+'px';
+            }else if (x+ulWidth > dWidth) {
+                   menu.style.display="block";
+		           menu.style.left=x-ulWidth+'px';
+		           menu.style.top=y+'px';
+            }else if( y+ulHeight > dHight){
+                   menu.style.display="block";
+		           menu.style.left=x+'px';
+		           menu.style.top=y-ulHeight+'px';
+            }else{
+	               menu.style.display="block";
+		           menu.style.left=x+'px';
+		           menu.style.top=y+'px';
+            }
+           return false;
+   	   }
+   	   document.onclick=function(){
+   	   	 menu.style.display='none';
+   	   }
+       document.oncontextmenu=function(){
+       	 return false;
+       }
+   </script>
+</body>
+</html>
