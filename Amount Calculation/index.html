@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>es6</title>
+</head>
+<style type="text/css">
+	*{padding: 0;margin: 0}
+	table td{border: 1px solid #ccc;width: 200px;text-align: center;}
+	table th{border: 1px solid #ccc;width: 200px;text-align: center;}
+</style>
+<body>
+<label>天数:</label>
+<input type="number" name="day" id="day" >
+<br>
+<label>总金额:</label>
+<input type="number" name="day" id="money" placeholder="例如：80000">
+<br>
+<label>平台税:</label>
+<input type="number" name="day" id="tax" placeholder="例如：0.13">
+<br>
+<button>确认</button>
+<table>
+	<thead>
+		<tr>
+			<th>天数</th>
+			<th>每天返还金额</th>
+			<th>平台税</th>
+			<th>实际返回金额</th>
+			<th>返还总金额</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	</tbody>
+</table>
+
+<script src="jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+   $(function(){
+     
+     $('button').click(function(){
+     	    $('table tbody tr').remove();
+            let day= $('#day').val();
+            console.log(day)
+            let moneny=$('#money').val();
+		    const rate=$('#tax').val();
+		    let count=0;
+		    for (let i = 1; i <= day; i++) {
+		    	let c= Math.pow((1-0.002),i);
+		    	let d= Math.pow((1-0.002),i-1);
+		    	let actualAmount=(moneny*d-moneny*c)-((moneny*d-moneny*c)*rate);//实际金额;
+		    	
+		    	count += actualAmount;
+		    	let tableData=`<tr>
+									<td>${i}天</td>
+									<td>${(moneny*d-moneny*c).toFixed(2)}元</td>
+									<td>${((moneny*d-moneny*c)*rate).toFixed(2)}元</td>
+									<td>${actualAmount.toFixed(2)}元</td>
+									<td>${count.toFixed(2)}元</td>
+								</tr>`
+				 $('table tbody').append(tableData);				
+		    }
+
+		   });
+     });
+
+   
+
+	
+    
+</script>
+</body>
+</html>
