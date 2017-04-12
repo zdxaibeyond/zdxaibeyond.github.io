@@ -43,19 +43,19 @@
      
      $('button').click(function(){
      	    $('table tbody tr').remove();
-            let day= $('#day').val();
-	    let bl=$('#money1').val();
+            var day= $('#day').val();
+	    var bl=$('#money1').val();
             console.log(day)
-            let moneny=$('#money').val();
-		    const rate=$('#tax').val();
-		    let count=0;
-		    for (let i = 1; i <= day; i++) {
-		    	let c= Math.pow((1-bl),i);
-		    	let d= Math.pow((1-bl),i-1);
-		    	let actualAmount=(moneny*d-moneny*c)-((moneny*d-moneny*c)*rate);//实际金额;
+            var moneny=$('#money').val();
+		    var rate=$('#tax').val();
+		    var count=0;
+		    for (var i = 1; i <= day; i++) {
+		    	var c= Math.pow((1-bl),i);
+		    	var d= Math.pow((1-bl),i-1);
+		    	var actualAmount=(moneny*d-moneny*c)-((moneny*d-moneny*c)*rate);//实际金额;
 		    	
 		    	count += actualAmount;
-		    	let tableData=`<tr>
+		    	var tableData=`<tr>
 									<td>${i}天</td>
 									<td>${(moneny*d-moneny*c).toFixed(2)}元</td>
 									<td>${((moneny*d-moneny*c)*rate).toFixed(2)}元</td>
