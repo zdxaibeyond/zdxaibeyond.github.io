@@ -30,6 +30,7 @@
 			<th>平台税</th>
 			<th>实际返回金额</th>
 			<th>返还总金额</th>
+			<th>返还总金额和总金额比率</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -61,6 +62,7 @@
 									<td>${((moneny*d-moneny*c)*rate).toFixed(2)}元</td>
 									<td>${actualAmount.toFixed(2)}元</td>
 									<td>${count.toFixed(2)}元</td>
+                                                                        <td>${((count/moneny).toFixed(2))*100}%</td>
 								</tr>`
 				 $('table tbody').append(tableData);				
 		    }
